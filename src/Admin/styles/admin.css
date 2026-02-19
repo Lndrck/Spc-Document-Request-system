@@ -1,0 +1,45 @@
+/* Admin Panel Specific Styles - Fixed Sidebar, Scrollable Content */
+
+/* Main layout container - locks app to viewport */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+  background-color: #f9fafb;
+}
+
+/* Main content area - independently scrollable */
+.admin-main-content {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f7fe;
+}
+
+/* Content spacing */
+.admin-content-spacing {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* Scrollbar styling for main content */
+.admin-main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-main-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.admin-main-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.admin-main-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
