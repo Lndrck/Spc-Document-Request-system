@@ -4,6 +4,7 @@ import { Megaphone, CalendarDays } from "lucide-react";
 
 const PublicAnnouncements = () => {
   const [announcement, setAnnouncement] = useState(null);
+  const [transactionDays, setTransactionDays] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,15 +14,37 @@ const PublicAnnouncements = () => {
         setLoading(true);
         setError(null);
 
+        console.log('🔍 [DEBUG] Fetching public data...');
+        console.log('🔍 [DEBUG] API baseURL:', api.defaults.baseURL);
+
+        // DEBUG: Log the exact URL being called
+        const announcementsUrl = `${api.defaults.baseURL}/announcements/public`;
+        console.log('🔍 [DEBUG] Calling announcements URL:', announcementsUrl);
+
         // Fetch the published announcement
         const announcementResponse = await api.get('/announcements/public');
+        
+        console.log('✅ [DEBUG] Announcements response received:', announcementResponse.data);
 
         setAnnouncement(announcementResponse.data.announcement || {
           title: "Office Schedule Update",
           content: "The Office of the University Registrar will be conducting the Year-End Strategic Planning on M-Date-Date-Year."
         });
+
+        // DEBUG: Log the transaction days URL being called
+        const transactionUrl = `${api.defaults.baseURL}/public/transaction-days`;
+        console.log('🔍 [DEBUG] Calling transaction days URL:', transactionUrl);
+
+        // Fetch the published transaction days
+        const transactionResponse = await api.get('/public/transaction-days');
+        
+        console.log('✅ [DEBUG] Transaction days response received:', transactionResponse.data);
+        
+        setTransactionDays(transactionResponse.data.transactionDays || []);
       } catch (err) {
-        console.error('Error fetching public data:', err);
+        console.error('❌ [DEBUG] Error fetching public data:', err);
+        console.error('❌ [DEBUG] Error response:', err.response);
+        console.error('❌ [DEBUG] Error request:', err.request);
         setError('Failed to load announcements. Please try again later.');
       } finally {
         setLoading(false);
@@ -130,26 +153,29 @@ const PublicAnnouncements = () => {
               <div className="bg-green-100 p-3 rounded-lg mr-3">
                 <CalendarDays className="w-6 h-6 text-green-700" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-green-700">Published Announcement</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-green-700">Published Transaction Days</h3>
             </div>
 
-            {announcement && Object.keys(announcement).length > 0 ? (
+            {transactionDays && transactionDays.length > 0 ? (
               <div className="space-y-4">
-                <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-                  <h4 className="font-semibold text-green-800 mb-2">{announcement.title}</h4>
-                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
-                    {announcement.content}
-                  </p>
-                  {announcement.created_at && (
-                    <p className="text-xs text-green-600 mt-3 italic">
-                      Published on: {formatDate(announcement.created_at)}
-                    </p>
-                  )}
-                </div>
+                {transactionDays.slice(0, 3).map((day, index) => (
+                  <div key={index} className="bg-green-50 p-4 rounded-lg border border-green-100">
+                    <h4 className="font-semibold text-green-800 mb-2">{formatDate(day.date)}</h4>
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <p><span className="font-medium">Status:</span> <span className={`uppercase font-semibold ${day.status === 'available' ? 'text-green-600' : day.status === 'limited' ? 'text-yellow-600' : 'text-red-600'}`}>{day.status}</span></p>
+                      {day.time_start && day.time_end && (
+                        <p><span className="font-medium">Time:</span> {day.time_start} - {day.time_end}</p>
+                      )}
+                      {day.message && (
+                        <p className="mt-2 italic">{day.message}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-                <p className="text-gray-500 italic">No announcement published yet.</p>
+                <p className="text-gray-500 italic">No transaction days published yet.</p>
               </div>
             )}
           </div>
