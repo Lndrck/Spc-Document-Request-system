@@ -1,12 +1,11 @@
-import axios from 'axios';
+import axios from 'axios'; // Only this one at the top
 
 const api = axios.create({
-  // This tells the app to use Render, not Vercel, for data
+  // This correctly points to Render when the Vercel variable is missing
   baseURL: import.meta.env.VITE_API_URL || 'https://spc-document-request-system-backend-r3nd.onrender.com/api',
   timeout: 20000,
   withCredentials: true
 });
-
 // Request interceptor: attach JWT token if stored
 api.interceptors.request.use( 
   config => {
