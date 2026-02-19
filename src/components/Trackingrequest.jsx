@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Clock, CheckCircle2, AlertCircle, PackageCheck, Calendar } from 'lucide-react';
-import axios from 'axios';
+import api from '../lib/api';
 import spclogoo from '../assets/spclogoo.png';
 import registrarlogo from '../assets/registrarlogo.png';
 
@@ -32,7 +32,7 @@ const TrackingRequest = () => {
         throw new Error('invalid_format');
       }
 
-      const response = await axios.get(`/api/requests/track/${trackingId}`);
+      const response = await api.get(`/requests/track/${trackingId}`);
 
       if (response.data && response.data.request) {
         const { request, tracking } = response.data;

@@ -5,7 +5,7 @@ import {
   ArrowRight,
   Building2
 } from "lucide-react";
-import axios from "axios";
+import api from '../lib/api';
 import socket from "../services/socket";
 import spcBackground from "../assets/spc.png";
 import pgmNew from "../assets/pgmneww.jpg";
@@ -36,7 +36,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchAnnouncement = async () => {
       try {
-        const res = await axios.get("/api/public/announcements");
+        const res = await api.get("/public/announcements");
         const announcements = res.data.announcements || [];
         setAnnouncement(announcements.length > 0 ? announcements[0] : null);
       } catch (error) {
@@ -47,7 +47,7 @@ const Hero = () => {
 
     const fetchTransactionDays = async () => {
       try {
-        const res = await axios.get("/api/public/transaction-days");
+        const res = await api.get("/public/transaction-days");
         const transactionDays = res.data.transactionDays || [];
         setTransactionDay(transactionDays.length > 0 ? transactionDays[0] : null);
       } catch (error) {

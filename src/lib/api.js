@@ -1,19 +1,27 @@
 import axios from 'axios';
 
+// DEBUG: Log environment to diagnose 404 issues
+const API_URL = import.meta.env.VITE_API_URL;
+console.log('%c🔍 API Configuration Debug', 'background: #222; color: #bada55; padding: 4px;');
+console.log('VITE_API_URL from env:', API_URL);
+console.log('Is running on Vercel:', window.location.hostname.includes('vercel.app'));
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  // Use full URL from env variable, with fallback to production Render URL
+  baseURL: import.meta.env.VITE_API_URL || 'https://spc-document-request-system-backend-r3nd.onrender.com/api',
   timeout: 20000,
   withCredentials: true
 });
 
+// DEBUG: Log the actual baseURL being used
+console.log('Final baseURL:', api.defaults.baseURL);
+
 // Request interceptor: attach JWT token if stored
-api.interceptors.request.use(
+api.interceptors.request.use( 
   config => {
-    // If using localStorage (not recommended for XSS risk, prefer httpOnly cookie)
-    // const token = localStorage.getItem('access_token');
-    // if (token) config.headers.Authorization = `Bearer ${token}`;
-    
-    // Prefer server-set httpOnly cookies; axios auto-sends them with withCredentials
+    // Automatically attach admin or staff tokens
+    const token = localStorage.getItem('adminToken') || localStorage.getItem('staffToken');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   error => Promise.reject(error)
@@ -25,6 +33,15 @@ api.interceptors.response.use(
   error => {
     if (error.response) {
       const { status, data } = error.response;
+      
+      // 404: Log diagnostic info for debugging
+      if (status === 404) {
+        console.error('🚨 404 Error detected!');
+        console.error('   Request URL:', error.config?.url);
+        console.error('   Full baseURL:', api.defaults.baseURL);
+        console.error('   This usually means VITE_API_URL is not set in Vercel environment variables.');
+        console.error('   Check your Vercel dashboard → Settings → Environment Variables');
+      }
       
       // 401: Unauthorized — redirect to login
       if (status === 401) {

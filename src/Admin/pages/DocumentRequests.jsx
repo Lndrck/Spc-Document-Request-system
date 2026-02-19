@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import axios from 'axios';
+import api from '../../lib/api';
 import { useStatisticsRefresh } from '../../hooks/useStatisticsRefresh';
 import Modal from '../../components/Modal';
 import reportService from '../../services/reportService';
@@ -198,7 +198,7 @@ const DocumentRequests = () => {
       };
 
       console.log('Fetching requests with params:', params);
-      const response = await axios.get('/api/requests', {
+      const response = await api.get('/requests', {
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -313,8 +313,8 @@ const DocumentRequests = () => {
         throw new Error('Invalid date format. Use YYYY-MM-DD.');
       }
 
-      // Make direct API call with axios - Admin can download all departments
-      const response = await axios.post('/api/reports/document-requests', {}, {
+      // Make direct API call with api - Admin can download all departments
+      const response = await api.post('/reports/document-requests', {}, {
         headers: { 
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

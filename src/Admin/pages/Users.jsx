@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../lib/api';
 import { UserPlus, X, Shield, Mail, Lock, User, Building2, CheckCircle } from 'lucide-react';
 import spcBackground from '../../assets/spc.png';
 
@@ -51,13 +51,13 @@ const Users = () => {
 
 
         // Fetch departments first
-        const departmentsResponse = await axios.get('/api/departments');
+        const departmentsResponse = await api.get('/departments');
         if (departmentsResponse.data.success) {
           setDepartments(departmentsResponse.data.data);
         }
 
         // Fetch users
-        const usersResponse = await axios.get('/api/admin/users', {
+        const usersResponse = await api.get('/admin/users', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -136,13 +136,13 @@ const Users = () => {
       setFormLoading(true);
       const token = localStorage.getItem('adminToken');
       
-      const response = await axios.delete(`/api/admin/users/${userIdToDelete}`, {
+      const response = await api.delete(`/admin/users/${userIdToDelete}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
       if (response.data.success) {
         // Refresh users list
-        const usersResponse = await axios.get('/api/admin/users', {
+        const usersResponse = await api.get('/admin/users', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -246,7 +246,7 @@ const Users = () => {
       console.log('Available departments:', departments.map(d => ({ id: d.department_id, name: d.department_name })));
       console.log('=== END DEBUG ===');
 
-      const response = await axios({
+      const response = await api({
         method: isEdit ? 'put' : 'post',
         url: isEdit ? `/api/admin/users/${selectedUser.id}` : '/api/admin/users',
         data: dataToSubmit,
@@ -255,7 +255,7 @@ const Users = () => {
 
       if (response.data.success) {
         // Refresh users list
-        const usersResponse = await axios.get('/api/admin/users', {
+        const usersResponse = await api.get('/admin/users', {
           headers: { Authorization: `Bearer ${token}` }
         });
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from '../lib/api';
 import { Megaphone, CalendarDays } from "lucide-react";
 
 const PublicAnnouncements = () => {
@@ -14,7 +14,7 @@ const PublicAnnouncements = () => {
         setError(null);
 
         // Fetch the published announcement
-        const announcementResponse = await axios.get('/api/announcements/public');
+        const announcementResponse = await api.get('/announcements/public');
 
         setAnnouncement(announcementResponse.data.announcement || {
           title: "Office Schedule Update",

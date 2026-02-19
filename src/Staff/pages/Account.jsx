@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../lib/api';
 import spcLogo from '../../assets/spclogoo.png';
 
 const Account = () => {
@@ -39,7 +39,7 @@ const Account = () => {
     try {
       // Logic handles both adminToken and general token
       const token = localStorage.getItem('staffToken') || localStorage.getItem('adminToken') || localStorage.getItem('token');
-      const response = await axios.put('/api/auth/update-profile', {
+      const response = await api.put('/auth/update-profile', {
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim()
       }, {

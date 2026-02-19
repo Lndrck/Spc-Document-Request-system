@@ -4,7 +4,7 @@ import { X, Save, AlertCircle } from 'lucide-react';
 import StatisticsCard from '../../Admin/pages/StatisticsCard';
 import { useStatistics } from '../../hooks/useStatistics';
 import { getCurrentUser } from '../../services/authService';
-import axios from 'axios';
+import api from '../../lib/api';
 import socket from '../../services/socket';
 
 const Dashboard = () => {
@@ -52,7 +52,7 @@ const Dashboard = () => {
       }
 
       // Fetch staff dashboard data which includes department info
-      const response = await axios.get('/api/staff/dashboard', {
+      const response = await api.get('/staff/dashboard', {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -114,7 +114,7 @@ const Dashboard = () => {
   // Function to fetch published announcement
   const fetchPublishedAnnouncement = async () => {
     try {
-      const response = await axios.get('/api/announcements/public');
+      const response = await api.get('/announcements/public');
       setPublishedAnnouncement(response.data.announcement || {
         title: "Office Schedule Update",
         content: "The Office of the University Registrar will be conducting the Year-End Strategic Planning on M-Date-Date-Year."
@@ -135,7 +135,7 @@ const Dashboard = () => {
     if (!token) return;
 
     try {
-      const response = await axios.get('/api/transactions', {
+      const response = await api.get('/transactions', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTransactions(response.data.transactionDays || []);
@@ -167,7 +167,7 @@ const Dashboard = () => {
 
       try {
         // Fetch announcements for editing (staff can see announcements to edit)
-        const announcementsResponse = await axios.get('/api/announcements', {
+        const announcementsResponse = await api.get('/announcements', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -217,7 +217,7 @@ const Dashboard = () => {
 
       // Fetch the announcement directly from the database
       const announcementToEdit = announcements[0];
-      const response = await axios.get(`/api/announcements/${announcementToEdit.id}`, {
+      const response = await api.get(`/announcements/${announcementToEdit.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -326,7 +326,7 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await axios.put(`/api/announcements/${editingAnnouncement.id}`, {
+      const response = await api.put(`/announcements/${editingAnnouncement.id}`, {
         title: announcementForm.title,
         content: announcementForm.content
       }, {
@@ -340,7 +340,7 @@ const Dashboard = () => {
         setAnnouncementForm({ title: '', content: '' });
 
         // Refresh the data
-        const updatedResponse = await axios.get('/api/announcements', {
+        const updatedResponse = await api.get('/announcements', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setAnnouncements(updatedResponse.data.announcements || []);
@@ -383,7 +383,7 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await axios.put(`/api/transactions/${editingTransaction.id}`, transactionForm, {
+      const response = await api.put(`/transactions/${editingTransaction.id}`, transactionForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -394,7 +394,7 @@ const Dashboard = () => {
         setTransactionForm({ date: '', status: 'available', time_start: '', time_end: '', message: '' });
 
         // Refresh the data
-        const updatedResponse = await axios.get('/api/transactions', {
+        const updatedResponse = await api.get('/transactions', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTransactions(updatedResponse.data.transactionDays || []);

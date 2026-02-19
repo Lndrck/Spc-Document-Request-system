@@ -1,5 +1,8 @@
 // Authentication service for handling login, logout, and token management
-const API_BASE_URL = '/api/auth'
+// Use the full URL from environment variables, not relative paths
+const API_BASE_URL = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/auth` 
+  : '/api/auth'
 
 // Simple JWT-like token verification (for basic validation)
 const verifyToken = (token) => {

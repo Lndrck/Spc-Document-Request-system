@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import spcLogo from "../assets/spclogoo.png";
 import backgroundImage from "../assets/spc.png";
+import api from "../lib/api";
 
 const Login = ({ setIsAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ const Login = ({ setIsAuthenticated }) => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -52,21 +53,34 @@ const Login = ({ setIsAuthenticated }) => {
     setErrors({});
     setIsLoading(true);
 
-    // Simulate a successful login
-    const mockToken = "fake-token-for-testing";
+    try {
+      // Make real API call to backend
+      const response = await api.post('/auth/login', {
+        email: formData.email,
+        password: formData.password
+      });
 
-    if (userType === "admin") {
-      localStorage.setItem("adminToken", mockToken);
-      localStorage.setItem("userType", "admin");
-      if (setIsAuthenticated) setIsAuthenticated({ admin: true, staff: false });
-      navigate("/admin");
-    } else {
-      localStorage.setItem("staffToken", mockToken);
-      localStorage.setItem("userType", "staff");
-      if (setIsAuthenticated) setIsAuthenticated({ admin: false, staff: true });
-      navigate("/staff");
+      const { token, user } = response.data;
+
+      if (user.role === "admin") {
+        localStorage.setItem("adminToken", token);
+        localStorage.setItem("userType", "admin");
+        localStorage.setItem("user", JSON.stringify(user));
+        if (setIsAuthenticated) setIsAuthenticated({ admin: true, staff: false });
+        navigate("/admin");
+      } else {
+        localStorage.setItem("staffToken", token);
+        localStorage.setItem("userType", "staff");
+        localStorage.setItem("user", JSON.stringify(user));
+        if (setIsAuthenticated) setIsAuthenticated({ admin: false, staff: true });
+        navigate("/staff");
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrors({ form: error.response?.data?.message || 'Login failed. Please try again.' });
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

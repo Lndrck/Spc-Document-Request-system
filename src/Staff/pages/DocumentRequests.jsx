@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import axios from 'axios';
+import api from '../../lib/api';
 import { useStatisticsRefresh } from '../../hooks/useStatisticsRefresh';
 import Modal from '../../components/Modal';
 import reportService from '../../services/reportService';
@@ -212,7 +212,7 @@ const DocumentRequests = () => {
       console.log('Fetching requests with params:', params);
       console.log('Authorization header:', `Bearer ${token.substring(0, 20)}...`);
 
-      const response = await axios.get('/api/staff/requests', {
+      const response = await api.get('/staff/requests', {
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -357,8 +357,8 @@ const DocumentRequests = () => {
       const selectedDept = staffDepartments?.find(d => d.department_id === selectedDepartmentId);
       const deptName = selectedDept?.department_name?.replace(/\s+/g, '-') || 'department';
 
-      // Make direct API call with axios (POST method as defined in server routes)
-      const response = await axios.post(
+      // Make direct API call with api (POST method as defined in server routes)
+      const response = await api.post(
         '/api/reports/document-requests',
         {},
         {
@@ -458,7 +458,7 @@ const DocumentRequests = () => {
       if (payload.status) {
         // Update status using statusId
         const statusId = mapStatusToStatusId(payload.status);
-        const statusResponse = await axios.put(`/api/requests/${requestId}/status`, {
+        const statusResponse = await api.put(`/requests/${requestId}/status`, {
           statusId: statusId
         }, {
           headers: {
@@ -476,7 +476,7 @@ const DocumentRequests = () => {
 
       // Handle scheduled pickup update
       if (payload.scheduled_pickup !== undefined) {
-        const scheduleResponse = await axios.put(`/api/requests/${requestId}/schedule`, {
+        const scheduleResponse = await api.put(`/requests/${requestId}/schedule`, {
           scheduled_pickup: payload.scheduled_pickup
         }, {
           headers: {
@@ -544,7 +544,7 @@ const DocumentRequests = () => {
 
     try {
       const token = localStorage.getItem('staffToken');
-      await axios.delete(`/api/staff/requests/${requestId}`, {
+      await api.delete(`/staff/requests/${requestId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

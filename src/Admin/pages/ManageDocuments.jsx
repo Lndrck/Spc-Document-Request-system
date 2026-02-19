@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Plus, Edit, Trash2, Save, X, AlertCircle, ChevronDown, ChevronUp, Search, Filter } from 'lucide-react';
-import axios from 'axios';
+import api from '../../lib/api';
 
 const API_BASE_URL = '/api';
 
@@ -43,7 +43,7 @@ const ManageDocuments = () => {
   const fetchDocuments = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/admin/documents`, {
+      const response = await api.get(`/admin/documents`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('adminToken') || localStorage.getItem('token')}` }
       });
       const documentsData = response.data.documents || response.data.data || response.data || [];
@@ -135,7 +135,7 @@ const ManageDocuments = () => {
 
     try {
       setSubmitLoading(true);
-      await axios.post(`${API_BASE_URL}/admin/documents`, formData, {
+      await api.post(`/admin/documents`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem('adminToken') || localStorage.getItem('token')}` }
       });
 
@@ -198,7 +198,7 @@ const ManageDocuments = () => {
 
     try {
       setSubmitLoading(true);
-      await axios.put(`${API_BASE_URL}/admin/documents/${editingId}`, formData, {
+      await api.put(`/admin/documents/${editingId}`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem('adminToken') || localStorage.getItem('token')}` }
       });
 
@@ -256,7 +256,7 @@ const ManageDocuments = () => {
     setDeletingDoc(true);
 
     try {
-      await axios.delete(`${API_BASE_URL}/admin/documents/${id}`, {
+      await api.delete(`/admin/documents/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('adminToken') || localStorage.getItem('token')}` }
       });
       

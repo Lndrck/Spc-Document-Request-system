@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from '../lib/api';
 import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
@@ -17,7 +17,7 @@ const VerifyEmail = () => {
       }
 
       try {
-        const res = await axios.post("http://localhost:5000/api/verify-email", { token });
+        const res = await api.post("/verify-email", { token });
         if (res.data.success) {
           setMessage(res.data.message); // ✅ "Your email has been verified successfully!"
           setNextEnabled(true); // Enable Next: Summary button

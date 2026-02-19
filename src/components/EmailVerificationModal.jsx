@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, Mail, RefreshCw } from 'lucide-react';
-import axios from 'axios';
+import api from '../lib/api';
 
 const EmailVerificationModal = ({ isOpen, onClose, onVerified, email, verifyOTP, setOtpCode, sendVerificationEmail, isVerifyingOTP }) => {
   const [code, setCodeState] = useState(['', '', '', '', '', '']);
@@ -99,7 +99,7 @@ const EmailVerificationModal = ({ isOpen, onClose, onVerified, email, verifyOTP,
     } else {
       // Fallback: direct API call
       try {
-        const response = await axios.post(`${API_BASE_URL}/verify-email-code`, {
+        const response = await api.post(`/verify-email-code`, {
           email: email.trim(),
           code: verificationCode.trim()
         });
