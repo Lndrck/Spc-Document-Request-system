@@ -1,16 +1,16 @@
 import { io } from 'socket.io-client';
 
-// Use the environment variable for production, fallback to local for development
+// Dynamic URL: Use environment variable or fallback to Render root (strip /api)
 const SOCKET_URL = import.meta.env.VITE_API_URL 
   ? import.meta.env.VITE_API_URL.replace('/api', '') 
-  : 'http://localhost:5000';
+  : 'https://spc-document-request-system-backend-r3nd.onrender.com';
 
 const socket = io(SOCKET_URL, {
-  transports: ['websocket'], // Force websocket for better performance
+  transports: ['websocket'],
   upgrade: true,
   rememberUpgrade: true,
-  timeout: 20000, //
-  withCredentials: true // Required for cross-origin (Vercel to Render)
+  timeout: 20000,
+  withCredentials: true
 });
 
 // Debugging listeners

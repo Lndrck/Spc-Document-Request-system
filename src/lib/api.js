@@ -7,7 +7,7 @@ console.log('VITE_API_URL from env:', API_URL);
 console.log('Is running on Vercel:', window.location.hostname.includes('vercel.app'));
 
 const api = axios.create({
-  // Use full URL from env variable, with fallback to production Render URL
+  // Force the full Render URL if the environment variable is missing
   baseURL: import.meta.env.VITE_API_URL || 'https://spc-document-request-system-backend-r3nd.onrender.com/api',
   timeout: 20000,
   withCredentials: true
