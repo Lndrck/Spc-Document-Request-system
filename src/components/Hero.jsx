@@ -36,22 +36,29 @@ const Hero = () => {
   useEffect(() => {
     const fetchAnnouncement = async () => {
       try {
-        const res = await api.get("/public/announcements");
-        const announcements = res.data.announcements || [];
-        setAnnouncement(announcements.length > 0 ? announcements[0] : null);
+        console.log('🔍 [HERO] Fetching announcement from /announcements/public');
+        // Use /announcements/public which returns the published announcement
+        const res = await api.get("/announcements/public");
+        console.log('🔍 [HERO] Announcement response:', res.data);
+        // The /announcements/public returns { announcement: {...} }
+        setAnnouncement(res.data.announcement || null);
       } catch (error) {
-        console.error('Error fetching announcement:', error);
+        console.error('❌ [HERO] Error fetching announcement:', error);
         setAnnouncement(null);
       }
     };
 
     const fetchTransactionDays = async () => {
       try {
-        const res = await api.get("/public/transaction-days");
+        console.log('🔍 [HERO] Fetching transaction days from /transactions/upcoming');
+        // Use /transactions/upcoming which returns upcoming transaction days
+        const res = await api.get("/transactions/upcoming");
+        console.log('🔍 [HERO] Transaction days response:', res.data);
+        // The /transactions/upcoming returns { transactionDays: [...] }
         const transactionDays = res.data.transactionDays || [];
         setTransactionDay(transactionDays.length > 0 ? transactionDays[0] : null);
       } catch (error) {
-        console.error('Error fetching transaction days:', error);
+        console.error('❌ [HERO] Error fetching transaction days:', error);
         setTransactionDay(null);
       }
     };
