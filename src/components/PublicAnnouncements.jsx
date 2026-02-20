@@ -18,10 +18,11 @@ const PublicAnnouncements = () => {
         console.log('🔍 [DEBUG] API baseURL:', api.defaults.baseURL);
 
         // DEBUG: Log the exact URL being called
-        const announcementsUrl = `${api.defaults.baseURL}/announcements/public`;
-        console.log('🔍 [DEBUG] Calling announcements URL:', announcementsUrl);
+        const fullAnnouncementsUrl = `${api.defaults.baseURL}/announcements/public`;
+        console.log('🔍 [DEBUG] Calling announcements URL:', fullAnnouncementsUrl);
 
         // Fetch the published announcement
+        // FIX: Use the correct path /announcements/public (backend has this route)
         const announcementResponse = await api.get('/announcements/public');
         
         console.log('✅ [DEBUG] Announcements response received:', announcementResponse.data);
@@ -32,11 +33,13 @@ const PublicAnnouncements = () => {
         });
 
         // DEBUG: Log the transaction days URL being called
-        const transactionUrl = `${api.defaults.baseURL}/public/transaction-days`;
-        console.log('🔍 [DEBUG] Calling transaction days URL:', transactionUrl);
+        const fullTransactionUrl = `${api.defaults.baseURL}/transactions/upcoming`;
+        console.log('🔍 [DEBUG] Calling transaction days URL:', fullTransactionUrl);
 
         // Fetch the published transaction days
-        const transactionResponse = await api.get('/public/transaction-days');
+        // FIX: Use /transactions/upcoming instead of /public/transaction-days
+        // Backend route at /api/transactions/upcoming returns proper structure
+        const transactionResponse = await api.get('/transactions/upcoming');
         
         console.log('✅ [DEBUG] Transaction days response received:', transactionResponse.data);
         
