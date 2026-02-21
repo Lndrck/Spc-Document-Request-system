@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import spcLogo from "../assets/spclogoo.png";
-import backgroundImage from "../assets/spc.png";
 import api from "../lib/api";
 
 const Login = ({ setIsAuthenticated }) => {
@@ -89,10 +87,10 @@ const Login = ({ setIsAuthenticated }) => {
         {/* Left Side */}
         <div
           className="w-1/2 bg-cover bg-center p-8 text-white flex flex-col justify-between"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
+          style={{ backgroundImage: `url(/spc.png)` }}
         >
           <div>
-            <img src={spcLogo} alt="Logo" className="h-24 w-24" />
+            <img src="/spclogoo.png" alt="Logo" className="h-24 w-24" />
           </div>
           <div>
             <h1 className="text-4xl font-bold">

@@ -1,14 +1,12 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import spcLogo from '../assets/spclogoo.png';
-import bgImage from '../assets/spc.png';
 
 const LoginRedirect = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{
-      backgroundImage: `url(${bgImage})`,
+      backgroundImage: `url(/spc.png)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
@@ -17,7 +15,7 @@ const LoginRedirect = () => {
         {/* Logo */}
         <div className="flex justify-center mb-8 relative z-10">
           <div className="w-32 h-32 flex items-center justify-center transform transition-all duration-300 hover:scale-105">
-            <img src={spcLogo} alt="SPC Logo" className="w-full h-full object-contain" />
+            <img src="/spclogoo.png" alt="SPC Logo" className="w-full h-full object-contain" />
           </div>
         </div>
 

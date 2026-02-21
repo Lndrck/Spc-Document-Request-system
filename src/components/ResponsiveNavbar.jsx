@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Menu, X, Home, Search, FileText, HelpCircle, LogIn } from "lucide-react";
-import spcLogo from "../assets/spclogoo.png";
-import registrarLogo from "../assets/registrarlogo.png";
 
 const ResponsiveNavbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -73,12 +71,12 @@ const ResponsiveNavbar = () => {
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <img
-                  src={spcLogo}
+                  src="/spclogoo.png"
                   alt="SPC Logo"
                   className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 object-contain"
                 />
                 <img
-                  src={registrarLogo}
+                  src="/registrarlogo.png"
                   alt="Registrar Logo"
                   className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 object-contain"
                 />

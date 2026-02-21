@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Menu, X, Home, Search, FileText, HelpCircle, LogIn } from "lucide-react";
-import spcLogo from "../assets/spclogoo.png";
-import registrarLogo from "../assets/registrarlogo.png";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -57,12 +55,12 @@ const Header = () => {
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               <img 
-                src={spcLogo} 
+                src="/spclogoo.png" 
                 alt="SPC Logo" 
                 className="w-12 h-12 lg:w-16 lg:h-16 object-contain" 
               />
               <img
-                src={registrarLogo}
+                src="/registrarlogo.png"
                 alt="Registrar Logo"
                 className="w-12 h-12 lg:w-16 lg:h-16 object-contain"
               />

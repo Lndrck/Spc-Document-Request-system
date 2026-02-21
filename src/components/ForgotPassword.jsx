@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaArrowLeft } from 'react-icons/fa';
-import bgImage from '../assets/spc.png';
-import logoImage from '../assets/spclogoo.png';
 import { forgotPassword } from '../services/authService';
 
 const ForgotPassword = () => {
@@ -60,7 +58,7 @@ const ForgotPassword = () => {
     <div
       className="min-h-screen relative flex items-center justify-center p-4"
       style={{
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: `url(/spc.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -87,7 +85,7 @@ const ForgotPassword = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <img
-              src={logoImage}
+              src="/spclogoo.png"
               alt="SPC Logo"
               className="w-20 h-20 object-contain mx-auto mb-4"
             />

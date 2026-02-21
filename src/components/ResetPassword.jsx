@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { FaLock, FaArrowLeft } from 'react-icons/fa';
-import bgImage from '../assets/spc.png';
-import logoImage from '../assets/spclogoo.png';
 import { resetPassword } from '../services/authService';
 
 const ResetPassword = () => {
@@ -84,7 +82,7 @@ const ResetPassword = () => {
       <div
         className="min-h-screen relative flex items-center justify-center p-4"
         style={{
-          backgroundImage: `url(${bgImage})`,
+          backgroundImage: `url(/spc.png)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -119,7 +117,7 @@ const ResetPassword = () => {
     <div
       className="min-h-screen relative flex items-center justify-center p-4"
       style={{
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: `url(/spc.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -146,7 +144,7 @@ const ResetPassword = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <img
-              src={logoImage}
+              src="/spclogoo.png"
               alt="SPC Logo"
               className="w-20 h-20 object-contain mx-auto mb-4"
             />
