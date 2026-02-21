@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Clock, CheckCircle2, AlertCircle, PackageCheck, Calendar } from 'lucide-react';
 import api from '../lib/api';
-import spclogoo from '../assets/spclogoo.png';
-import registrarlogo from '../assets/registrarlogo.png';
 
 const TrackingRequest = () => {
   const [trackingId, setTrackingId] = useState('');
@@ -112,8 +110,8 @@ const TrackingRequest = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-50/30 to-emerald-100/50"></div>
       <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-[90%] sm:max-w-2xl mx-auto relative z-10">
         <div className="flex justify-center items-center gap-4 mb-6">
-            <img src={spclogoo} alt="SPC Logo" className="h-16 md:h-20 object-contain" />
-            <img src={registrarlogo} alt="Registrar Logo" className="h-16 md:h-20 object-contain" />
+            <img src="/spclogoo.png" alt="SPC Logo" className="h-16 md:h-20 object-contain" />
+            <img src="/registrarlogo.png" alt="Registrar Logo" className="h-16 md:h-20 object-contain" />
         </div>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 text-center">Track Your Request</h2>
         <p className="text-center text-gray-500 mb-6">Enter the reference number (SPC-DOC-XXXXXX-XXXX or REF-XXXXXX-XXXX) or request number (12 digits) from your confirmation email.</p>
