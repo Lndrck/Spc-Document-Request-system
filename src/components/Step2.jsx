@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { FileText, Plus, Minus, AlertCircle } from 'lucide-react';
-import spcBackground from '../assets/spc.png';
 import { useRequest } from '../hooks/useRequest';
 import { EmailVerificationModal } from './index';
 

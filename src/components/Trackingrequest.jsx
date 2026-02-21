@@ -95,7 +95,7 @@ const TrackingRequest = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center pt-28 px-4 relative overflow-hidden" style={{
-      backgroundImage: 'url("../assets/spc.png")',
+      backgroundImage: 'url("/spc.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'

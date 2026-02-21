@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../lib/api';
-import spcLogo from '../../assets/spclogoo.png';
 
 const Account = () => {
   const [user, setUser] = useState(null);
@@ -84,7 +83,7 @@ const Account = () => {
               {/* Avatar Container */}
               <div className="relative">
                 <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-lg p-3">
-                  <img src={spcLogo} alt="SPC Logo" className="w-full h-full object-contain" />
+                  <img src="/spclogoo.png" alt="SPC Logo" className="w-full h-full object-contain" />
                 </div>
                 <div className="absolute -bottom-2 -right-2 bg-green-400 border-4 border-green-600 w-6 h-6 rounded-full shadow-sm"></div>
               </div>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import bgImage from '../../assets/spc.png';
-import logoImage from '../../assets/spclogoo.png';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { login, initializeAuth } from '../../services/authService';
 
@@ -68,7 +66,7 @@ const StaffLogin = ({ setIsAuthenticated }) => {
 
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4" style={{
-      backgroundImage: `url(${bgImage})`,
+      backgroundImage: `url(/spc.png)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
@@ -81,7 +79,7 @@ const StaffLogin = ({ setIsAuthenticated }) => {
           <div className="w-full md:w-1/2 flex items-center justify-center p-10">
             <div className="text-center">
               <img
-                src={logoImage}
+                src="/spclogoo.png"
                 alt="SPC Logo"
                 className="w-40 h-40 object-contain mx-auto transition-all duration-300 hover:scale-105"
               />

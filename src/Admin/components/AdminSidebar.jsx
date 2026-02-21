@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import spcLogo from '../../assets/spclogoo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const AdminSidebar = () => {
@@ -96,7 +95,7 @@ const AdminSidebar = () => {
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600 shadow-lg">
                 <img
-                  src={spcLogo}
+                  src="/spclogoo.png"
                   alt="San Pablo College"
                   className="w-10 h-10 object-contain"
                 />

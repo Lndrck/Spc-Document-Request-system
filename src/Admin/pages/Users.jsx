@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../lib/api';
 import { UserPlus, X, Shield, Mail, Lock, User, Building2, CheckCircle } from 'lucide-react';
-import spcBackground from '../../assets/spc.png';
 
 const Users = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -325,7 +324,7 @@ const Users = () => {
     <div 
       className="fixed inset-0 z-50 overflow-y-auto"
       style={{
-        backgroundImage: `url(${spcBackground})`,
+        backgroundImage: `url(/spc.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

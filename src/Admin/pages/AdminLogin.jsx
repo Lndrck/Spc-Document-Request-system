@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import bgImage from '../../assets/spc.png';
-import logoImage from '../../assets/spclogoo.png';
-import pgmLogo from '../../assets/pgm.png';
-
-// Debug: Log image paths
-console.log('🖼️ AdminLogin: Image paths:', {
-  bgImage: bgImage || 'MISSING',
-  logoImage: logoImage || 'MISSING',
-  pgmLogo: pgmLogo || 'MISSING'
-});
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { login, initializeAuth } from '../../services/authService';
 import '../styles/admin.css';
@@ -91,13 +81,11 @@ const AdminLogin = ({ setIsAuthenticated }) => {
     }
   };
 
-  console.log('🎨 AdminLogin: Rendering component with background image:', bgImage);
-
   return (
     <div
       className="min-h-screen relative flex items-center justify-center p-4 admin-login-page"
       style={{
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: `url(/spc.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -108,11 +96,6 @@ const AdminLogin = ({ setIsAuthenticated }) => {
       }}
       data-testid="admin-login-container"
     >
-      {/* Debug info */}
-      <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded text-xs z-50">
-        Debug: AdminLogin Rendered | BG: {bgImage ? 'Loaded' : 'Missing'}
-      </div>
-
       {/* Card */}
       <div className="relative z-10 w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl bg-white transition-all duration-300 hover:shadow-2xl" data-testid="admin-login-card">
         <div className="flex flex-col md:flex-row">
@@ -120,14 +103,14 @@ const AdminLogin = ({ setIsAuthenticated }) => {
           <div className="w-full md:w-1/2 flex items-center justify-center p-10 relative overflow-hidden">
             {/* PGM background image with low opacity */}
             <img
-              src={pgmLogo}
+              src="/pgm.png"
               alt="PGM Logo Background"
               className="absolute inset-0 w-full h-full object-contain opacity-10 pointer-events-none select-none z-0"
               style={{ left: 0, top: 0 }}
             />
             <div className="text-center relative z-10">
               <img
-                src={logoImage}
+                src="/spclogoo.png"
                 alt="SPC Logo"
                 className="w-40 h-40 object-contain mx-auto transition-all duration-300 hover:scale-105"
               />
