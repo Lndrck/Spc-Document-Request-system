@@ -909,7 +909,10 @@ const docTypes = ['All', 'TOR', 'COC', 'COG'];
                         <span
                           className="text-blue-600 underline hover:text-blue-800 cursor-pointer truncate block"
                           title={`Click to view verification file: ${request.verification_photo}`}
-                          onClick={() => window.open(`http://localhost:5000/uploads/${request.verification_photo}`, '_blank')}
+                          onClick={() => {
+                            const backend = (import.meta.env.VITE_API_URL || 'https://spc-document-request-system-backend-r3nd.onrender.com').replace(/\/api\/?$/, '');
+                            window.open(`${backend}/uploads/${request.verification_photo}`, '_blank');
+                          }}
                         >
                           👁 {request.verification_photo}
                         </span>

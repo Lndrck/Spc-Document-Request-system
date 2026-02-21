@@ -8,7 +8,7 @@ const EmailVerificationModal = ({ isOpen, onClose, onVerified, email, verifyOTP,
   const [resendTimer, setResendTimer] = useState(0);
   const inputRefs = useRef([]);
 
-  const API_BASE_URL = 'http://localhost:5000/api';
+  // Use the centralized api instance which already points to VITE_API_URL or Render fallback
 
   // Focus first input when modal opens
   useEffect(() => {
